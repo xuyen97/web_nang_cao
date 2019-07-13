@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPageHome.cshtml";
+}
+<div class="row">
+    @*Lọc các tour theo mức giá tương ứng*@
+    <div class="col-sm-2">
+        <table class="table">
+            <tr>
+                <th>Mức giá tour</th>
+            </tr>
+            <tr>
+                <td>
+                    <a href="#">
+                        Từ 1tr đến 3tr500
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="#">
+                        Từ trên 3tr500 đến 6tr
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="#">
+                        Từ trên 6tr đến 8tr500
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="#">
+                        Trên 8tr500
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    @*Danh sách tour hiện có trong hệ thống*@
+    <div class="col-sm-10">
+        <table class="table">
+            <tr>
+                <th>Danh sách tour </th>
+            </tr>
+        </table>
+    </div>
+</div>
+
