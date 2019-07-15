@@ -11,7 +11,7 @@ namespace QL_Tour_Du_Lich.Models
     {
         [HiddenInput(DisplayValue =false)]
         public int Id { get; set; }
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
         [Display(Name = "Ngày lập")]
         public DateTime Ngay_Lap { get; set; }
         [Required]

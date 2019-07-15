@@ -15,7 +15,7 @@ namespace QL_Tour_Du_Lich.Models
         [Display(Name ="Tên khách hàng")]
         public string Ten_Khach_Hang { get; set; }
         [Required]
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
         [Display(Name ="Ngày lập")]
         public DateTime Ngay_Lap { get; set; }
         [Required(ErrorMessage = "Vui lòng không để trống !")]

@@ -1,0 +1,98 @@
+﻿@model IEnumerable<QL_Tour_Du_Lich.Models.Tour>
+
+@{
+    ViewBag.Title = "Quản lý tour";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+<style>
+   #hinhmau{
+       width:160px;
+       height:90px;
+   }
+</style>
+<h2>Danh sách tour hiện có</h2>
+
+<p>
+    @Html.ActionLink("Thêm tour mới", "CreateTour")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Ten_Tour)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hinh_Anh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Thoi_Gian_Di)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Thoi_Gian_Ve)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ma_Loai_Tour)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Lich_Trinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Trang_Thai)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.So_Luong_Tham_Gia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.So_Luong_Da_Tham_Gia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gioi_Thieu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Thanh_Pho)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ten_Tour)
+        </td>
+        <td>
+            <img src="~/Hinh/@Html.DisplayFor(modelItem => item.Hinh_Anh)" id="hinhmau"/>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Thoi_Gian_Di)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Thoi_Gian_Ve)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ma_Loai_Tour)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lich_Trinh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Trang_Thai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.So_Luong_Tham_Gia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.So_Luong_Da_Tham_Gia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gioi_Thieu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Thanh_Pho)
+        </td>
+        <td>
+            @Html.ActionLink("Sửa", "EditTour", new { id=item.Tour_Id }) |
+            @Html.ActionLink("Xóa", "DeleteTour", new { id=item.Tour_Id })
+        </td>
+    </tr>
+}
+
+</table>
