@@ -18,14 +18,14 @@ namespace QL_Tour_Du_Lich.Models
         [Display(Name ="Hình ảnh")]
         public string Hinh_Anh { get; set; }
         [Required(ErrorMessage = "Vui lòng không để trống !")]
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
         [Display(Name = "Thời gian đi")]
         public DateTime Thoi_Gian_Di { get; set; }
         [Required(ErrorMessage = "Vui lòng không để trống !")]
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
         [Display(Name = "Thời gian về")]
         public DateTime Thoi_Gian_Ve { get; set; }
-        [HiddenInput(DisplayValue =false)]
+        [Display(Name ="Loại tour")]
         public int Ma_Loai_Tour { get; set; }
         [Required(ErrorMessage = "Vui lòng không để trống !")]
         [DataType(DataType.MultilineText)]
@@ -39,6 +39,13 @@ namespace QL_Tour_Du_Lich.Models
         public int So_Luong_Tham_Gia { get; set; }
         [Display(Name = "Tổng số người đã tham gia")]
         public int So_Luong_Da_Tham_Gia { get; set; }
+        [Required(ErrorMessage = "Vui lòng không để trống !")]
+        [Display(Name = "Giới thiệu về tour")]
+        [DataType(DataType.MultilineText)]
+        public string Gioi_Thieu { get; set; }
+        [Required(ErrorMessage = "Vui lòng không để trống !")]
+        [Display(Name ="Thành phố")]
+        public string Thanh_Pho { get; set; }
         public virtual Loai_Tour Loai_Tour { get; set; }
     }
 }

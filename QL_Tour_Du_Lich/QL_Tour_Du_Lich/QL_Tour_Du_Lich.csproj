@@ -150,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Tai_KhoanController.cs" />
     <Compile Include="Global.asax.cs">
@@ -158,6 +159,22 @@
     <Compile Include="Migrations\201907131339351_suaquanhetaikhoangvsnguoidung.cs" />
     <Compile Include="Migrations\201907131339351_suaquanhetaikhoangvsnguoidung.Designer.cs">
       <DependentUpon>201907131339351_suaquanhetaikhoangvsnguoidung.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907141228123_themthuoctinhtrongtour.cs" />
+    <Compile Include="Migrations\201907141228123_themthuoctinhtrongtour.Designer.cs">
+      <DependentUpon>201907141228123_themthuoctinhtrongtour.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907141256396_updatetour.cs" />
+    <Compile Include="Migrations\201907141256396_updatetour.Designer.cs">
+      <DependentUpon>201907141256396_updatetour.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907141528390_update_Tour_HoaDon_ChiTietHoaDon.cs" />
+    <Compile Include="Migrations\201907141528390_update_Tour_HoaDon_ChiTietHoaDon.Designer.cs">
+      <DependentUpon>201907141528390_update_Tour_HoaDon_ChiTietHoaDon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907151205357_addThanh_PhovaoTour.cs" />
+    <Compile Include="Migrations\201907151205357_addThanh_PhovaoTour.Designer.cs">
+      <DependentUpon>201907151205357_addThanh_PhovaoTour.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Chi_Tiet_Hoa_Don.cs" />
@@ -186,6 +203,13 @@
     <Content Include="scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\_LayoutPageHome.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutPageAdmin.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\DSTour.cshtml" />
+    <Content Include="Views\Admin\CreateTour.cshtml" />
+    <Content Include="Views\Admin\EditTour.cshtml" />
+    <Content Include="Views\Home\ChiTietTour.cshtml" />
+    <Content Include="Views\Home\DatTour.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -195,10 +219,23 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Hinh\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201907131339351_suaquanhetaikhoangvsnguoidung.resx">
       <DependentUpon>201907131339351_suaquanhetaikhoangvsnguoidung.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907141228123_themthuoctinhtrongtour.resx">
+      <DependentUpon>201907141228123_themthuoctinhtrongtour.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907141256396_updatetour.resx">
+      <DependentUpon>201907141256396_updatetour.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907141528390_update_Tour_HoaDon_ChiTietHoaDon.resx">
+      <DependentUpon>201907141528390_update_Tour_HoaDon_ChiTietHoaDon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907151205357_addThanh_PhovaoTour.resx">
+      <DependentUpon>201907151205357_addThanh_PhovaoTour.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
