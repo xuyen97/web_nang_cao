@@ -30,7 +30,7 @@
             @Html.DisplayNameFor(model => model.Thoi_Gian_Ve)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Ma_Loai_Tour)
+            @Html.DisplayNameFor(model => model.Loai_Tour_Id)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Lich_Trinh)
@@ -50,6 +50,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Thanh_Pho)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gia)
+        </th>
         <th></th>
     </tr>
 
@@ -68,7 +71,7 @@
             @Html.DisplayFor(modelItem => item.Thoi_Gian_Ve)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Ma_Loai_Tour)
+            @Html.DisplayFor(modelItem => item.Loai_Tour_Id)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Lich_Trinh)
@@ -87,6 +90,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Thanh_Pho)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gia)
         </td>
         <td>
             @Html.ActionLink("Sửa", "EditTour", new { id=item.Tour_Id }) |

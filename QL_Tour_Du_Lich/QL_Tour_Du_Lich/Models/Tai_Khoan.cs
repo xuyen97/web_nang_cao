@@ -20,6 +20,6 @@ namespace QL_Tour_Du_Lich.Models
         public string Mat_Khau { get; set; }
         [HiddenInput(DisplayValue =false)]
         public int Loai_Nguoi_Dung_Id { get; set; }
-        public virtual Nguoi_Dung Nguoi_Dung { get; set; }
+        public virtual Loai_Nguoi_Dung Loai_Nguoi_Dung { get; set; }
     }
 }

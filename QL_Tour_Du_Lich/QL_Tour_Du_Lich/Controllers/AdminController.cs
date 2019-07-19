@@ -21,23 +21,33 @@ namespace QL_Tour_Du_Lich.Controllers
         {
             return View(db.Tours.ToList());
         }
+        private void ListLoaiTour()
+        {
+            List<Loai_Tour> listloaitour = db.Loai_Tours.ToList();
+            SelectList selectlist = new SelectList(listloaitour, "Loai_Tour_ID", "Ten_Loai_Tour", "Loai_Tour_ID");
+            ViewBag.ListLoaiTour = selectlist;
+        }
         public ActionResult CreateTour()
         {
+            ListLoaiTour();
             return View();
         }
         [HttpPost]
         public ActionResult CreateTour(Tour tour)
         {
-            if(ModelState.IsValid)
+            ListLoaiTour();
+            if (ModelState.IsValid)
             {
                 //Save hình
                 var fhinh = Request.Files["Hinh_Anh"];
                 var pathhinh = Server.MapPath("~/Hinh/" + fhinh.FileName);
                 fhinh.SaveAs(pathhinh);
                 tour.Hinh_Anh = fhinh.FileName;
+                tour.So_Luong_Da_Tham_Gia = 0;
                 db.Tours.Add(tour);
                 db.SaveChanges();
-                return RedirectToAction("DSTour");
+                ViewBag.ThongBao = "Tạo thành công";
+                return View();
             }
             return View(tour);
         }
@@ -52,6 +62,7 @@ namespace QL_Tour_Du_Lich.Controllers
             {
                 return HttpNotFound();
             }
+            ListLoaiTour();
             return View(tour);
         }
         [HttpPost]
@@ -80,6 +91,7 @@ namespace QL_Tour_Du_Lich.Controllers
             }
             return View(tour);
         }
+        
         public ActionResult DeleteTour(int id)
         {
 

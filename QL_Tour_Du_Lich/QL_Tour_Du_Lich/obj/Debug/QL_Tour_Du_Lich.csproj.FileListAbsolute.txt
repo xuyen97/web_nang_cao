@@ -45,7 +45,6 @@ E:\WebNC\Nhom\project\web_nang_cao\QL_Tour_Du_Lich\QL_Tour_Du_Lich\bin\System.We
 E:\WebNC\Nhom\project\web_nang_cao\QL_Tour_Du_Lich\QL_Tour_Du_Lich\bin\System.Web.Webpages.Razor.xml
 E:\WebNC\Nhom\project\web_nang_cao\QL_Tour_Du_Lich\QL_Tour_Du_Lich\bin\System.Web.Helpers.xml
 E:\WebNC\Nhom\project\web_nang_cao\QL_Tour_Du_Lich\QL_Tour_Du_Lich\bin\System.Web.Mvc.xml
-E:\WebNC\Nhom\project\web_nang_cao\QL_Tour_Du_Lich\QL_Tour_Du_Lich\obj\Debug\QL_Tour_Du_Lich.csprojResolveAssemblyReference.cache
 E:\WebNC\Nhom\project\web_nang_cao\QL_Tour_Du_Lich\QL_Tour_Du_Lich\obj\Debug\QL_Tour_Du_Lich.dll
 E:\WebNC\Nhom\project\web_nang_cao\QL_Tour_Du_Lich\QL_Tour_Du_Lich\obj\Debug\QL_Tour_Du_Lich.pdb
 E:\WebNC\Nhom\project\web_nang_cao\QL_Tour_Du_Lich\QL_Tour_Du_Lich\obj\Debug\QL_Tour_Du_Lich.Migrations.suaquanhetaikhoangvsnguoidung.resources
@@ -54,3 +53,8 @@ E:\WebNC\Nhom\project\web_nang_cao\QL_Tour_Du_Lich\QL_Tour_Du_Lich\obj\Debug\QL_
 E:\WebNC\Nhom\project\web_nang_cao\QL_Tour_Du_Lich\QL_Tour_Du_Lich\obj\Debug\QL_Tour_Du_Lich.Migrations.updatetour.resources
 E:\WebNC\Nhom\project\web_nang_cao\QL_Tour_Du_Lich\QL_Tour_Du_Lich\obj\Debug\QL_Tour_Du_Lich.Migrations.update_Tour_HoaDon_ChiTietHoaDon.resources
 E:\WebNC\Nhom\project\web_nang_cao\QL_Tour_Du_Lich\QL_Tour_Du_Lich\obj\Debug\QL_Tour_Du_Lich.Migrations.addThanh_PhovaoTour.resources
+E:\WebNC\Nhom\project\web_nang_cao\QL_Tour_Du_Lich\QL_Tour_Du_Lich\obj\Debug\QL_Tour_Du_Lich.Migrations.addgiatour.resources
+E:\WebNC\Nhom\project\web_nang_cao\QL_Tour_Du_Lich\QL_Tour_Du_Lich\obj\Debug\QL_Tour_Du_Lich.Migrations.updatethuoctinhtrongtour.resources
+E:\WebNC\Nhom\project\web_nang_cao\QL_Tour_Du_Lich\QL_Tour_Du_Lich\obj\Debug\QL_Tour_Du_Lich.Migrations.updatethuoctinhtaikhoan.resources
+E:\WebNC\Nhom\project\web_nang_cao\QL_Tour_Du_Lich\QL_Tour_Du_Lich\obj\Debug\QL_Tour_Du_Lich.Migrations.suahiatrongtour.resources
+E:\WebNC\Nhom\project\web_nang_cao\QL_Tour_Du_Lich\QL_Tour_Du_Lich\obj\Debug\QL_Tour_Du_Lich.csprojResolveAssemblyReference.cache
