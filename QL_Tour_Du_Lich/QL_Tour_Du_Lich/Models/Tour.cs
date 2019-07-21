@@ -37,6 +37,7 @@ namespace QL_Tour_Du_Lich.Models
         [Display(Name = "Trạng thái")]
         public string Trang_Thai { get; set; }
         [Required(ErrorMessage = "Vui lòng không để trống !")]
+        [Range(10,50,ErrorMessage ="Số lượng người trong tour phải >=10 và <=50")]
         [Display(Name = "Tổng số người tham gia")]
         public int So_Luong_Tham_Gia { get; set; }
         [Display(Name = "Tổng số người đã tham gia")]

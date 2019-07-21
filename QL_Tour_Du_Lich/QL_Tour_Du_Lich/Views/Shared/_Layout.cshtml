@@ -7,8 +7,22 @@
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <style>
+        .test {
+            background-color: white;
+            font-size: 18px;
+            font-weight: bold;
+            -webkit-animation: my 700ms infinite;
+            -moz-animation: my 700ms infinite;
+            -o-animation: my 700ms infinite;
+            animation: my 700ms infinite;
+            text-align: right;
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
+    <p class="test"> HotLine: 0397611751</p>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -21,6 +35,42 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Trong nước
+                            @if ((List<QL_Tour_Du_Lich.Models.Tour>)@ViewBag.DSThanhPhoTrongNuoc != null)
+                            {
+                                <span class="caret"></span>
+                            }
+                        </a>
+                        <ul class="dropdown-menu">
+                            @foreach (var x in (List<QL_Tour_Du_Lich.Models.Tour>)@ViewBag.DSThanhPhoTrongNuoc)
+                            {
+                                <li>
+                                    @Html.ActionLink(x.Thanh_Pho, "QueryTrongNuoc", new { tp = x.Thanh_Pho })
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Ngoài nước
+                            @if ((List<QL_Tour_Du_Lich.Models.Tour>)@ViewBag.DSThanhNgoaiTrongNuoc != null)
+                            {
+                                <span class="caret"></span>
+                            }
+                        </a>
+                        <ul class="dropdown-menu">
+                            @foreach (var x in (List<QL_Tour_Du_Lich.Models.Tour>)@ViewBag.DSThanhPhoNgoaiNuoc)
+                            {
+                                <li>
+                                    @Html.ActionLink(x.Thanh_Pho, "QueryNgoaiNuoc", new { tp = x.Thanh_Pho })
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                    <li><a href="/Home/DangKy"><span class="glyphicon glyphicon-user"></span> Đăng ký</a></li>
+                    <li><a href="/Home/DangNhap"><span class="glyphicon glyphicon-log-in"></span> Đăng nhập</a></li>
                 </ul>
             </div>
         </div>

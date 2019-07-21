@@ -1,0 +1,65 @@
+﻿@model IEnumerable<QL_Tour_Du_Lich.Models.Tour>
+
+@{
+    ViewBag.Title = "Danh sách tour";
+    Layout = "~/Views/Shared/_LayoutPageSuccessLogin.cshtml";
+}
+
+<style>
+    #hinh_tour {
+        width: 500px;
+        height: 250px;
+    }
+
+    #thongbao {
+        color: blue;
+    }
+</style>
+<div class="container">
+    <table class="table">
+        <tr>
+            <td><h2>Các tour hiện có</h2></td>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <h3>
+                        @Html.ActionLink(item.Ten_Tour, "ChiTietTour", new { id = item.Tour_Id })
+                    </h3>
+                    <div class="col-md-8">
+                        <img src="~/Hinh/@Html.DisplayFor(m => item.Hinh_Anh)" id="hinh_tour" />
+                    </div>
+                    <div class="col-md-4" id="gioi_thieu_ttour">
+                        <div>
+                            <h4>
+                                @Html.DisplayName("Ngày bắt đầu: ")
+                                @Html.DisplayFor(m => item.Thoi_Gian_Di)
+                            </h4>
+                        </div>
+                        <div>
+                            <h4>
+                                @Html.DisplayName("Ngày kết thúc: ")
+                                @Html.DisplayFor(m => item.Thoi_Gian_Ve)
+                            </h4>
+
+                        </div>
+                        <div>
+                            <h4>
+                                @Html.DisplayName("Giá: ")
+                                @Html.DisplayFor(m => item.Gia)
+                            </h4>
+
+                        </div>
+                        <div>
+                            <h4>
+                                @Html.DisplayName("Điểm đến: ")
+                                @Html.DisplayFor(m => item.Thanh_Pho)
+                            </h4>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

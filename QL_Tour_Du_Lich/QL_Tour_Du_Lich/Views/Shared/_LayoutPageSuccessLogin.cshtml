@@ -9,16 +9,16 @@
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
     <style>
         .test {
-         background-color:white;
-         font-size:18px;
-         font-weight:bold;
-	 -webkit-animation: my 700ms infinite;
-	 -moz-animation: my 700ms infinite; 
-	 -o-animation: my 700ms infinite; 
-	 animation: my 700ms infinite;
-     text-align:right;
-     margin-right:10px;
-}
+            background-color: white;
+            font-size: 18px;
+            font-weight: bold;
+            -webkit-animation: my 700ms infinite;
+            -moz-animation: my 700ms infinite;
+            -o-animation: my 700ms infinite;
+            animation: my 700ms infinite;
+            text-align: right;
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
@@ -47,7 +47,7 @@
                             @foreach (var x in (List<QL_Tour_Du_Lich.Models.Tour>)@ViewBag.DSThanhPhoTrongNuoc)
                             {
                                 <li>
-                                    @Html.ActionLink(x.Thanh_Pho, "QueryTrongNuoc",new { tp= x.Thanh_Pho })
+                                    @Html.ActionLink(x.Thanh_Pho, "QueryTrongNuoc", new { tp = x.Thanh_Pho })
                                 </li>
                             }
                         </ul>
@@ -69,8 +69,7 @@
                             }
                         </ul>
                     </li>
-                    <li><a href="/Home/DangKy"><span class="glyphicon glyphicon-user"></span> Đăng ký</a></li>
-                    <li><a href="/Home/DangNhap"><span class="glyphicon glyphicon-log-in"></span> Đăng nhập</a></li>
+                    <li><a href="/Home/Index"><span class="glyphicon glyphicon-log-out"></span> @Session["Email"]</a></li>
                 </ul>
             </div>
         </div>
@@ -130,25 +129,25 @@
                         <tr>
                             <td>
                                 <h4>@Html.ActionLink("Từ 2tr đến 3tr500", "QueryGia", new { id = 1 })</h4>
-                                
+
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <h4>@Html.ActionLink("Từ 3tr500 đến 5tr", "QueryGia", new { id = 2 })</h4>
-                                
+
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <h4>@Html.ActionLink("Từ 5tr đến 6tr500", "QueryGia", new { id = 3 })</h4>
-                                
+
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <h4>@Html.ActionLink("Từ 6tr500 đến 8tr", "QueryGia", new { id = 4 })</h4>
-                                
+
                             </td>
                         </tr>
                         <tr>
@@ -156,7 +155,7 @@
                                 <h4>
                                     @Html.ActionLink("Trên 8tr", "QueryGia", new { id = 5 })
                                 </h4>
-                                
+
                             </td>
                         </tr>
                     </table>

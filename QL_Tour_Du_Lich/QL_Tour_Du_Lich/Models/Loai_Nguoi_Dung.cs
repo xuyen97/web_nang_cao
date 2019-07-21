@@ -15,6 +15,6 @@ namespace QL_Tour_Du_Lich.Models
         [Required(ErrorMessage = "Vui lòng không để trống !")]
         [Display(Name = "Tên loại")]
         public string Ten_Loai { get; set; }
-        public ICollection<Nguoi_Dung> Nguoi_Dung { get; set; }
+        public ICollection<Tai_Khoan> TaiKhoans { get; set; }
     }
 }

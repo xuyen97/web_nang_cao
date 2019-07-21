@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<QL_Tour_Du_Lich.Models.Tour>
 
 @{
-    ViewBag.Title = "Quản lý tour";
+    ViewBag.Title = "Admin";
     Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
 }
 <style>
@@ -9,8 +9,12 @@
        width:160px;
        height:90px;
    }
+   #tuadeqltour{
+       text-align:center;
+       color:red;
+   }
 </style>
-<h2>Danh sách tour hiện có</h2>
+<h2 id="tuadeqltour">QUẢN LÝ TOUR</h2>
 
 <p>
     @Html.ActionLink("Thêm tour mới", "CreateTour")

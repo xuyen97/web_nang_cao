@@ -9,16 +9,16 @@
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
     <style>
         .test {
-         background-color:white;
-         font-size:18px;
-         font-weight:bold;
-	 -webkit-animation: my 700ms infinite;
-	 -moz-animation: my 700ms infinite; 
-	 -o-animation: my 700ms infinite; 
-	 animation: my 700ms infinite;
-     text-align:right;
-     margin-right:10px;
-}
+            background-color: white;
+            font-size: 18px;
+            font-weight: bold;
+            -webkit-animation: my 700ms infinite;
+            -moz-animation: my 700ms infinite;
+            -o-animation: my 700ms infinite;
+            animation: my 700ms infinite;
+            text-align: right;
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
@@ -47,7 +47,9 @@
                             @foreach (var x in (List<QL_Tour_Du_Lich.Models.Tour>)@ViewBag.DSThanhPhoTrongNuoc)
                             {
                                 <li>
-                                    @Html.ActionLink(x.Thanh_Pho, "QueryTrongNuoc",new { tp= x.Thanh_Pho })
+                                    <a href="#">
+                                        @Html.DisplayFor(m => x.Thanh_Pho)
+                                    </a>
                                 </li>
                             }
                         </ul>
@@ -64,13 +66,14 @@
                             @foreach (var x in (List<QL_Tour_Du_Lich.Models.Tour>)@ViewBag.DSThanhPhoNgoaiNuoc)
                             {
                                 <li>
-                                    @Html.ActionLink(x.Thanh_Pho, "QueryNgoaiNuoc", new { tp = x.Thanh_Pho })
+                                    <a href="#">
+                                        @Html.DisplayFor(m => x.Thanh_Pho)
+                                    </a>
                                 </li>
                             }
                         </ul>
                     </li>
-                    <li><a href="/Home/DangKy"><span class="glyphicon glyphicon-user"></span> Đăng ký</a></li>
-                    <li><a href="/Home/DangNhap"><span class="glyphicon glyphicon-log-in"></span> Đăng nhập</a></li>
+                    <li><a href="/Home/Index"><span class="glyphicon glyphicon-log-out"></span> @Session["Email"]</a></li>
                 </ul>
             </div>
         </div>
@@ -119,55 +122,7 @@
     </div>
 
     <div class="container body-content">
-        <div class="container">
-            <div class="row">
-                @*Lọc theo các mức giá*@
-                <div class="col-md-3">
-                    <table class="table">
-                        <tr>
-                            <th><h2>Mức giá</h2></th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h4>@Html.ActionLink("Từ 2tr đến 3tr500", "QueryGia", new { id = 1 })</h4>
-                                
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h4>@Html.ActionLink("Từ 3tr500 đến 5tr", "QueryGia", new { id = 2 })</h4>
-                                
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h4>@Html.ActionLink("Từ 5tr đến 6tr500", "QueryGia", new { id = 3 })</h4>
-                                
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h4>@Html.ActionLink("Từ 6tr500 đến 8tr", "QueryGia", new { id = 4 })</h4>
-                                
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h4>
-                                    @Html.ActionLink("Trên 8tr", "QueryGia", new { id = 5 })
-                                </h4>
-                                
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                @*Hiển thị danh sách tour hiện có*@
-                <div class="col-md-9">
-                    @RenderBody()
-                </div>
-            </div>
-        </div>
-        @*@RenderBody()*@
+        @RenderBody()
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - Team 2 KTPM11A</p>
