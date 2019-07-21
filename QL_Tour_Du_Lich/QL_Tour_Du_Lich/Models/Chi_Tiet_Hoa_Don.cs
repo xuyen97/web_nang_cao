@@ -25,11 +25,13 @@ namespace QL_Tour_Du_Lich.Models
         [Required(ErrorMessage = "Vui lòng không để trống !")]
         [Display(Name = "Tổng giá")]
         public double Tong_Don_Gia { get; set; }
-        [Display(Name = "Mã tour")]
+        [Display(Name = "Tour được chọn")]
         public int Tour_Id { get; set; }
         [Required(ErrorMessage = "Vui lòng không để trống !")]
-        [Display(Name = "Số lượng")]
+        [Display(Name = "Số lượng người tham gia")]
         public int SoLuong { get; set; }
+        [Display(Name ="Trạng thái")]
+        public string Trang_Thai { get; set; }
         public virtual Tour Tour { get; set; }
     }
 }

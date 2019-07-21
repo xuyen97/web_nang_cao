@@ -21,7 +21,7 @@ namespace QL_Tour_Du_Lich.Controllers
         {
 
             LoadDefaulData();
-            return View(db.Tours.ToList());
+            return View(getListTour());
         }
         public ActionResult QueryGia(int id)
         {
@@ -39,25 +39,36 @@ namespace QL_Tour_Du_Lich.Controllers
             LoadDefaulData();
             return View(GetListByThanhPho(tp));
         }
+        private List<Tour> getListTour()
+        {
+            List<Tour> list = db.Tours.Where(x => x.So_Luong_Da_Tham_Gia < x.So_Luong_Tham_Gia).ToList();
+            return list;
+        }
         private List<Tour> GetListTourTrongNuoc()
         {
-            List<Tour> listtrongnuoc = db.Tours.Where(x => x.Loai_Tour_Id == 1).ToList();
+            Loai_Tour loai = db.Loai_Tours.Where(x=>x.Ten_Loai_Tour.Equals("Trong nước")).FirstOrDefault();
+            
+            int loaitourin = loai.Loai_Tour_Id;
+            
+            List<Tour> listtrongnuoc = db.Tours.Where(x => x.Loai_Tour_Id==loaitourin&&x.So_Luong_Da_Tham_Gia<x.So_Luong_Tham_Gia).ToList();
             return listtrongnuoc;
         }
         private List<Tour> GetListTourNgoaiNuoc()
         {
-            List<Tour> listngoainuoc = db.Tours.Where(x => x.Loai_Tour_Id == 2).ToList();
+            Loai_Tour loai1 = db.Loai_Tours.Where(x => x.Ten_Loai_Tour.Equals("Ngoài nước")).FirstOrDefault();
+            int loaitourout = loai1.Loai_Tour_Id;
+            List<Tour> listngoainuoc = db.Tours.Where(x => x.Loai_Tour_Id == loaitourout && x.So_Luong_Da_Tham_Gia < x.So_Luong_Tham_Gia).ToList();
             return listngoainuoc;
         }
         private List<Tour> GetListByThanhPho(string thanhpho)
         {
-            List<Tour> listtrongnuoc = db.Tours.Where(x => x.Thanh_Pho.Equals(thanhpho)).ToList();
+            List<Tour> listtrongnuoc = db.Tours.Where(x => x.Thanh_Pho.Equals(thanhpho) && x.So_Luong_Da_Tham_Gia < x.So_Luong_Tham_Gia).ToList();
             return listtrongnuoc;
         }
         private void LoadDefaulData()
         {
-            ViewBag.DSThanhPhoTrongNuoc = GetListTourTrongNuoc();
-            ViewBag.DSThanhPhoNgoaiNuoc = GetListTourNgoaiNuoc();
+            Session["DSThanhPhoTrongNuoc"] = GetListTourTrongNuoc();
+            Session["DSThanhPhoNgoaiNuoc"] = GetListTourNgoaiNuoc();
         }
         private List<Tour> GetListByPrice(int value)
         {
@@ -65,19 +76,19 @@ namespace QL_Tour_Du_Lich.Controllers
             switch (value)
             {
                 case 1:
-                    list = db.Tours.Where(x => x.Gia >= 2000000 && x.Gia < 3500000).ToList();
+                    list = db.Tours.Where(x => x.Gia >= 2000000 && x.Gia < 3500000 && x.So_Luong_Da_Tham_Gia < x.So_Luong_Tham_Gia).ToList();
                     break;
                 case 2:
-                    list = db.Tours.Where(x => x.Gia >= 3500000 && x.Gia < 5000000).ToList();
+                    list = db.Tours.Where(x => x.Gia >= 3500000 && x.Gia < 5000000 && x.So_Luong_Da_Tham_Gia < x.So_Luong_Tham_Gia).ToList();
                     break;
                 case 3:
-                    list = db.Tours.Where(x => x.Gia >= 5000000 && x.Gia < 6500000).ToList();
+                    list = db.Tours.Where(x => x.Gia >= 5000000 && x.Gia < 6500000 && x.So_Luong_Da_Tham_Gia < x.So_Luong_Tham_Gia).ToList();
                     break;
                 case 4:
-                    list = db.Tours.Where(x => x.Gia >= 6500000 && x.Gia < 8000000).ToList();
+                    list = db.Tours.Where(x => x.Gia >= 6500000 && x.Gia < 8000000 && x.So_Luong_Da_Tham_Gia < x.So_Luong_Tham_Gia).ToList();
                     break;
                 case 5:
-                    list = db.Tours.Where(x => x.Gia > 8000000).ToList();
+                    list = db.Tours.Where(x => x.Gia > 8000000 && x.So_Luong_Da_Tham_Gia < x.So_Luong_Tham_Gia).ToList();
                     break;
             }
             return list;
@@ -96,6 +107,7 @@ namespace QL_Tour_Du_Lich.Controllers
             Tour tour = db.Tours.Find(id);
             Session["TourId"] = id;
             SetDataTour(tour);
+            Session["loaixacnhan"] = "dattour";
             return View();
         }
         private void SetDataTour(Tour tour)
@@ -112,11 +124,15 @@ namespace QL_Tour_Du_Lich.Controllers
             ViewBag.LichTrinh = tour.Lich_Trinh;
             ViewBag.TourID = tour.Tour_Id;
         }
+        private Chi_Tiet_Hoa_Don getChiTietHoaDon(string ten, string email, DateTime ngay)
+        {
+            Chi_Tiet_Hoa_Don hd = db.Chi_Tiet_Hoa_Dons.Where(x => x.Ngay_Lap.Equals(ngay) && x.Ten_Khach_Hang.Equals(ten) && x.Email.Equals(email)).FirstOrDefault();
+            return hd;
+        }
         [HttpPost]
         public ActionResult DatTour(Chi_Tiet_Hoa_Don hd)
         {
             LoadDefaulData();
-            TempData["Layout"] = "_LayoutPageNguoiDung";
             int tourid= (int)Session["TourId"];
             Tour tour = db.Tours.Find(tourid);
             if (ModelState.IsValid)
@@ -125,19 +141,29 @@ namespace QL_Tour_Du_Lich.Controllers
                 {
                     if (hd.SoLuong > 0)
                     {
-                        hd.Ngay_Lap = DateTime.Parse(DateTime.Now.ToShortDateString());
-                        hd.Tong_Don_Gia = hd.SoLuong * tour.Gia;
-                        hd.Tour_Id = tourid;
-                        tour.So_Luong_Da_Tham_Gia = tour.So_Luong_Da_Tham_Gia + hd.SoLuong;
-                        db.Chi_Tiet_Hoa_Dons.Add(hd);
-                        db.Entry(tour).State = EntityState.Modified;
-                        db.SaveChanges();
-                        Chi_Tiet_Hoa_Don cthd = db.Chi_Tiet_Hoa_Dons.Where(x => x.Ngay_Lap.Equals(hd.Ngay_Lap) && x.Ten_Khach_Hang.Equals(hd.Ten_Khach_Hang)).FirstOrDefault();
-                        ViewBag.MaHoaDon = "Lưu lại mã hóa đơn và gọi hổ trợ khách hàng nếu muốn hủy (mã hóa đơn " + cthd.Id + ")";
-                        ViewBag.ThongBao = "Đã đặt thành công";
-                        SetDataTour(tour);
-                        sendMail(hd.Email,"Đặt tour từ Easy tour booking","Bạn đã đặt tour thành công. Mã số hóa đơn của bạn là: "+cthd.Id);
-                        return View(hd);
+                        try
+                        {
+                            hd.Ngay_Lap = DateTime.Parse(DateTime.Now.ToShortDateString());
+                            hd.Tong_Don_Gia = hd.SoLuong * tour.Gia;
+                            hd.Tour_Id = tourid;
+                            hd.Trang_Thai = "Chờ";
+                            tour.So_Luong_Da_Tham_Gia = tour.So_Luong_Da_Tham_Gia + hd.SoLuong;
+                            db.Chi_Tiet_Hoa_Dons.Add(hd);
+                            db.Entry(tour).State = EntityState.Modified;
+                            db.SaveChanges();
+                            Chi_Tiet_Hoa_Don ct = getChiTietHoaDon(hd.Ten_Khach_Hang, hd.Email, hd.Ngay_Lap);
+                            Session["hoadonsendmail"] = ct;
+                            string to = hd.Email.Trim();
+                            Session["thongbao"] = "Kiểm tra email của bạn để xác nhận đơn hàng";
+                            Session["Ma"] = randomMa();
+                            string bodysendmail = "Mã xác nhận của bạn là: " + Session["Ma"].ToString() + "<br/><table class='table'><tr><th>Mã hóa đơn</th><th>Ngày lập</th><th>Đơn giá</th><th>Người lập đơn hàng</th></tr><tr><td>" + ct.Id + "</td><td>" + ct.Ngay_Lap + "</td><td>" + ct.Tong_Don_Gia + "</td><td>" + ct.Ten_Khach_Hang + "</td></tr></table>";
+                            sendMail(to, "Đặt tour từ Easy tour booking", bodysendmail);
+                            SetDataTour(tour);
+                            return RedirectToAction("XacNhan");
+                        } catch (Exception)
+                        {
+                            return HttpNotFound();
+                        }
                     }
                     else
                     {
@@ -156,109 +182,19 @@ namespace QL_Tour_Du_Lich.Controllers
             SetDataTour(tour);
             return View();
         }
-        public ActionResult DangKy()
-        {
-            LoadDefaulData();
-            return View();
-        }
-        [HttpPost]
-        public ActionResult DangKy(Tai_Khoan tk)
-        {
-            LoadDefaulData();
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    if(kiemtraTK(tk)==false)
-                    {
-                        string matkhau = MD5Hash(tk.Mat_Khau);
-                        tk.Mat_Khau = matkhau;
-                        tk.Loai_Nguoi_Dung_Id = 1;
-                        db.Tai_Khoans.Add(tk);
-                        db.SaveChanges();
-                        return RedirectToAction("Index");
-                    }
-                    else
-                    {
-                        ViewBag.ThongBao = "Tên đăng nhập đã tồn tại";
-                        return View(tk);
-                    }
-                }catch(Exception )
-                {
-                    return HttpNotFound();
-                }
-            }
-            return View(tk);
-        }
-        public ActionResult DangNhap()
-        {
-            LoadDefaulData();
-            return View();
-        }
-        [HttpPost]
-        public ActionResult DangNhap(string Ten_Dang_Nhap, string Mat_Khau)
-        {
-            LoadDefaulData();
-            if (ModelState.IsValid)
-            {
-                string matkhau = MD5Hash(Mat_Khau);
-                if (kiemtraTkDN(Ten_Dang_Nhap, matkhau) == true)
-                {
-                    Tai_Khoan tk = getTaiKhoan(Ten_Dang_Nhap, matkhau);
-                    Session["Email"] = tk.Email;
-                    Loai_Nguoi_Dung loai = db.Loai_Nguoi_Dungs.Find(tk.Loai_Nguoi_Dung_Id);
-                    if (loai.Ten_Loai.Equals("Admin"))
-                    {
-                        return RedirectToAction("Index", "Admin");
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index","HomeLogin");
-                    }
-                }
-                else
-                {
-                    Session["thongbao"] = "";
-                    ViewBag.ThongBao = "Tài khoản hoặc mật khẩu không chính xác";
-                    return View();
-                }
-            }
-            return View();
-        }
-        public ActionResult QuenMatKhau()
-        {
-            LoadDefaulData();
-            return View();
-        }
-        [HttpPost]
-        public ActionResult QuenMatKhau(string emailaddress)
-        {
-            LoadDefaulData();
-            if (emailaddress != "")
-            {
-                LoadDefaulData();
-                Session["Ma"] = randomMa();
-                Session["emailreset"] = emailaddress;
-                Tai_Khoan tk = db.Tai_Khoans.Where(x => x.Email.Equals(emailaddress)).FirstOrDefault();
-                if (tk != null)
-                {
-                    sendMail(emailaddress, "Reset mật khẩu từ Easy tour booking", "Mã xác nhận của bạn là: " + (string)Session["Ma"]);
-                    Session["thongbao"] = "Mã xác nhận đã được tới email của bạn";
-                    return RedirectToAction("XacNhan");
-                }
-                else
-                {
-                    ViewBag.ThongBao = "Email này chưa được đăng ký";
-                    return View();
-                }
-            }
-            ViewBag.ThongBao = "Bạn chưa nhập địa chỉ email";
-            return View();
-            
-        }
         public ActionResult XacNhan()
         {
             LoadDefaulData();
+            if(Session["loaixacnhan"].ToString().Equals("resetmk"))
+            {
+                Session["ValueButton"] = "Lấy mật khẩu";
+                return View();
+            }             
+            if (Session["loaixacnhan"].ToString().Equals("dattour"))
+            {
+                Session["ValueButton"] = "Xác nhận";
+                return View();
+            }
             return View();
         }
         [HttpPost]
@@ -268,48 +204,43 @@ namespace QL_Tour_Du_Lich.Controllers
             if (xacnhan!="")
             {
                 string ma = (string)Session["Ma"];
-                if(xacnhan.Equals(ma.Trim()))
+                if (xacnhan.Equals(ma.Trim()))
                 {
-                    string email = (string)Session["emailreset"];
-                    Tai_Khoan tk = db.Tai_Khoans.Where(x => x.Email.Equals(email)).FirstOrDefault();
-                    tk.Mat_Khau = MD5Hash("12345678");
-                    db.Entry(tk).State = EntityState.Modified;
-                    db.SaveChanges();
-                    Session["thongbao"]= "Mật khẩu mới của bạn là: 12345678";
-                    return RedirectToAction("DangNhap");
+                    if (Session["loaixacnhan"].ToString().Equals("resetmk"))
+                    {
+                        string email = (string)Session["emailreset"];
+                        Tai_Khoan tk = db.Tai_Khoans.Where(x => x.Email.Equals(email)).FirstOrDefault();
+                        tk.Mat_Khau = MD5Hash("12345678");
+                        db.Entry(tk).State = EntityState.Modified;
+                        db.SaveChanges();
+                        Session["thongbaoreset"] = "Mật khẩu mới của bạn là: 12345678";
+                        return RedirectToAction("DangNhap");
+                    }
+                    if (Session["loaixacnhan"].ToString().Equals("dattour"))
+                    {
+                        Chi_Tiet_Hoa_Don hd = (Chi_Tiet_Hoa_Don)Session["hoadonsendmail"];
+                        Chi_Tiet_Hoa_Don ct = db.Chi_Tiet_Hoa_Dons.Find(hd.Id);
+                        ct.Trang_Thai = "Xác nhận";
+                        db.Entry(ct).State = EntityState.Modified;
+                        db.SaveChanges();
+                        ViewBag.ThongBao = "Xác nhận đơn hàng thành công";
+                        string body = "Đơn hàng đã được xác nhận. Nếu có bất kỳ sự thay đổi nào vui lòng liên lệ Hotline (0397611751) để được hỏ trợ";
+                        string subject = "Xác nhận đơn hàng từ Easy tour booking";
+                        sendMail(ct.Email,subject,body);
+                        return RedirectToAction("Index");
+                    }  
                 }
                 else
                 {
+                    Session["thongbao"] = "";
                     ViewBag.ThongBao = "Mã xác nhận không đúng";
                     return View();
                 }
                 
             }
+            Session["thongbao"] = "";
             ViewBag.ThongBao = "Bạn chưa nhập mã xác nhận";
             return View();
-        }
-        private Tai_Khoan getTaiKhoan(string ten,string mk)
-        {
-            Tai_Khoan tk = db.Tai_Khoans.Where(x => x.Ten_Dang_Nhap.Equals(ten) && x.Mat_Khau.Equals(mk)).FirstOrDefault();
-            return tk;
-        }
-        private bool kiemtraTkDN(string ten,string mk)
-        {
-            foreach (var x in db.Tai_Khoans.ToList())
-            {
-                if (x.Ten_Dang_Nhap.Equals(ten)&&x.Mat_Khau.Equals(mk))
-                    return true;
-            }
-            return false;
-        }
-        private bool kiemtraTK(Tai_Khoan tk)
-        {
-            foreach (var x in db.Tai_Khoans.ToList())
-            {
-                if (x.Ten_Dang_Nhap.Equals(tk.Ten_Dang_Nhap))
-                    return true;
-            }
-            return false;
         }
         private static string MD5Hash(string input)
         {
@@ -340,6 +271,7 @@ namespace QL_Tour_Du_Lich.Controllers
 
                 MailMessage mm = new MailMessage(from, email,subject,body);
                 mm.BodyEncoding = UTF8Encoding.UTF8;
+                mm.IsBodyHtml = true;
                 mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
 
                 client.Send(mm);

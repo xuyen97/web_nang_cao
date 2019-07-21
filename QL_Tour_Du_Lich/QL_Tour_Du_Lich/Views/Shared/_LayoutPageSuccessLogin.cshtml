@@ -31,20 +31,23 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("ETB", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("ETB", "Index", "HomeLogin", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#">Giới thiệu</a>
+                    </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             Trong nước
-                            @if ((List<QL_Tour_Du_Lich.Models.Tour>)@ViewBag.DSThanhPhoTrongNuoc != null)
+                            @if ((List<QL_Tour_Du_Lich.Models.Tour>)@Session["DSThanhPhoTrongNuoc"] != null)
                             {
                                 <span class="caret"></span>
                             }
                         </a>
                         <ul class="dropdown-menu">
-                            @foreach (var x in (List<QL_Tour_Du_Lich.Models.Tour>)@ViewBag.DSThanhPhoTrongNuoc)
+                            @foreach (var x in (List<QL_Tour_Du_Lich.Models.Tour>)@Session["DSThanhPhoTrongNuoc"])
                             {
                                 <li>
                                     @Html.ActionLink(x.Thanh_Pho, "QueryTrongNuoc", new { tp = x.Thanh_Pho })
@@ -55,13 +58,13 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             Ngoài nước
-                            @if ((List<QL_Tour_Du_Lich.Models.Tour>)@ViewBag.DSThanhNgoaiTrongNuoc != null)
+                            @if ((List<QL_Tour_Du_Lich.Models.Tour>)@Session["DSThanhPhoNgoaiNuoc"] != null)
                             {
                                 <span class="caret"></span>
                             }
                         </a>
                         <ul class="dropdown-menu">
-                            @foreach (var x in (List<QL_Tour_Du_Lich.Models.Tour>)@ViewBag.DSThanhPhoNgoaiNuoc)
+                            @foreach (var x in (List<QL_Tour_Du_Lich.Models.Tour>)@Session["DSThanhPhoNgoaiNuoc"])
                             {
                                 <li>
                                     @Html.ActionLink(x.Thanh_Pho, "QueryNgoaiNuoc", new { tp = x.Thanh_Pho })

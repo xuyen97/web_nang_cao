@@ -1,0 +1,70 @@
+﻿@model IEnumerable<QL_Tour_Du_Lich.Models.Chi_Tiet_Hoa_Don>
+
+@{
+    ViewBag.Title = "QLHoaDon";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+<style>
+    #tuade{
+        text-align:center;
+        color:red;
+    }
+</style>
+<h2 id="tuade">Quản lý hóa đơn</h2>
+<hr />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Tour.Ten_Tour)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ten_Khach_Hang)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ngay_Lap)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tong_Don_Gia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Trang_Thai)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tour.Ten_Tour)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ten_Khach_Hang)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ngay_Lap)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tong_Don_Gia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoLuong)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Trang_Thai)
+        </td>
+        <td>
+            @Html.ActionLink("Sửa", "EditHoaDon", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

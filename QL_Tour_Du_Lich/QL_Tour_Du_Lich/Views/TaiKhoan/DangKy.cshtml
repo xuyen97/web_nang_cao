@@ -1,20 +1,20 @@
 ﻿@model QL_Tour_Du_Lich.Models.Tai_Khoan
 
 @{
-    ViewBag.Title = "Đăng nhập";
+    ViewBag.Title = "Đăng ký tài khoản";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <style>
     #tuade{
-        text-align:center;
+        text-align:center
     }
     #thongbao{
         color:red;
     }
 </style>
-<h2 id="tuade">Đăng nhập</h2>
+<h2 id="tuade">Đăng ký</h2>
 <hr />
-@using (Html.BeginForm("DangNhap","Home",FormMethod.Post)) 
+@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
@@ -29,6 +29,14 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(model => model.Mat_Khau, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Mat_Khau, new { htmlAttributes = new { @class = "form-control" } })
@@ -39,14 +47,12 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <h4 id="thongbao">@ViewBag.ThongBao</h4>
-                <h4 id="thongbao">@Session["thongbao"]</h4>
-                <input type="submit" value="Đăng nhập" class="btn btn-default" />
-                <a href="/Home/QuenMatKhau">  Quên mật khẩu ?</a>
+                <input type="submit" value="Đăng ký" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Trở về", "Index")
+    <a href="/Home/Index">Trở về</a>
 </div>

@@ -11,9 +11,9 @@
         color:red;
     }
 </style>
-<h2 id="tuade">Xác nhận</h2>
+<h2 id="tuade">Quên mật khẩu</h2>
 <hr />
-@using (Html.BeginForm("XacNhan", "Home", FormMethod.Post))
+@using (Html.BeginForm("QuenMatKhau", "TaiKhoan", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -21,23 +21,22 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             <div class="col-md-2">
-                Nhập mã xác nhận: 
+                Nhập địa chỉ email đã đăng ký: 
             </div>
             <div class="col-md-10">
-                <input type="text" name="xacnhan" value="" />
+                <input type="email" name="emailaddress" value=""/>
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <h4 id="thongbao">@ViewBag.ThongBao</h4>
-                <h4 id="thongbao">@Session["thongbao"]</h4>
-                <input type="submit" value="@Session["ValueButton"]" class="btn btn-default" />
+                <input type="submit" value="Lấy mật khẩu" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 <div>
-    @Html.ActionLink("Trở về", "Index")
+    @Html.ActionLink("Trở về", "DangNhap")
 </div>
 

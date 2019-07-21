@@ -1,4 +1,5 @@
-﻿using QL_Tour_Du_Lich.Models;
+﻿using QL_Tour_Du_Lich.App_Start;
+using QL_Tour_Du_Lich.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -13,6 +14,7 @@ namespace QL_Tour_Du_Lich.Controllers
     {
         private Context_Database db = new Context_Database();
         // GET: Admin
+        
         public ActionResult Index()
         {
             return View();
@@ -96,6 +98,7 @@ namespace QL_Tour_Du_Lich.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Tour tour = db.Tours.Find(id);
+            Session["hinhhientai"] = tour.Hinh_Anh;
             if (tour == null)
             {
                 return HttpNotFound();
@@ -124,7 +127,7 @@ namespace QL_Tour_Du_Lich.Controllers
                         Tour t = db.Tours.Find(tour.Tour_Id);
                         if (hinh != "")
                         {
-
+                            Session["hinhthaydoi"] = hinh;
                             var pathdelete = Server.MapPath("~/Hinh/" + tour.Hinh_Anh);
                             System.IO.File.Delete(pathdelete);
                             var pathhinh = Server.MapPath("~/Hinh/" + hinh);
@@ -149,7 +152,7 @@ namespace QL_Tour_Du_Lich.Controllers
                         }
                         else
                         {
-
+                            Session["hinhhientai"] = t.Hinh_Anh;
                             t.Loai_Tour_Id = tour.Loai_Tour_Id;
                             t.Thoi_Gian_Di = tour.Thoi_Gian_Di;
                             t.Thoi_Gian_Ve = tour.Thoi_Gian_Ve;
@@ -182,7 +185,7 @@ namespace QL_Tour_Du_Lich.Controllers
             }
             return View(tour);
         }
-        public ActionResult Delete(int? id)
+        public ActionResult DeleteTour(int? id)
         {
             if (id == null)
             {
@@ -198,12 +201,94 @@ namespace QL_Tour_Du_Lich.Controllers
         [HttpPost]
         public ActionResult DeleteTour(int id)
         {
-            Tour tour = db.Tours.Find(id);
-            var pathdelete = Server.MapPath("~/Hinh/" + tour.Hinh_Anh);
-            System.IO.File.Delete(pathdelete);
-            db.Tours.Remove(tour);
-            db.SaveChanges();
-            return RedirectToAction("QLTour");
+            try
+            {
+                Tour tour = db.Tours.Find(id);
+                var pathdelete = Server.MapPath("~/Hinh/" + tour.Hinh_Anh);
+                foreach(var hd in db.Chi_Tiet_Hoa_Dons.ToList())
+                {
+                    if(hd.Tour_Id==id)
+                    {
+                        ViewBag.Delete = "Không thể xóa tour này. Chỉ được xóa những tour đã đóng hoặc chưa được đặt";
+                        return View(tour);
+                    }
+                }
+                System.IO.File.Delete(pathdelete);
+                db.Tours.Remove(tour);
+                db.SaveChanges();
+                return RedirectToAction("QLTour");
+            }catch(Exception)
+            {
+                return HttpNotFound();
+            }
+        }
+        public ActionResult QLHoaDon()
+        {
+            return View(db.Chi_Tiet_Hoa_Dons.ToList());
+        }
+        public ActionResult EditHoaDon(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Chi_Tiet_Hoa_Don hd = db.Chi_Tiet_Hoa_Dons.Find(id);
+            Session["hoadonhientai"] = hd;
+            if (hd == null)
+            {
+                return HttpNotFound();
+            }
+            setDataDropEditHoaDon();
+            return View(hd);
+        }
+        [HttpPost]
+        public ActionResult EditHoaDon(Chi_Tiet_Hoa_Don hd)
+        {
+            setDataDropEditHoaDon();
+            if (ModelState.IsValid)
+            {
+                Tour tour = getTour(hd.Tour_Id);
+                Chi_Tiet_Hoa_Don hdcu = (Chi_Tiet_Hoa_Don)Session["hoadonhientai"];
+                int slcu = hdcu.SoLuong;
+                int sldathamgia = tour.So_Luong_Da_Tham_Gia;
+                int soluong = hd.SoLuong;
+                int slchophep = tour.So_Luong_Tham_Gia - tour.So_Luong_Da_Tham_Gia;
+                if (soluong > slchophep)
+                {
+                    ViewBag.ThongBao = "Số lượng gnuoiwf tham gia vượt mức co phép";
+                    return View(hd);
+                }
+                else
+                {
+                    tour.So_Luong_Da_Tham_Gia = sldathamgia - slcu;
+                    db.Entry(tour).State = EntityState.Modified;
+                    db.SaveChanges();
+                    tour.So_Luong_Da_Tham_Gia = tour.So_Luong_Da_Tham_Gia + hd.SoLuong;
+                    db.Entry(tour).State = EntityState.Modified;
+                    hd.Ngay_Lap = hdcu.Ngay_Lap;
+                    hd.Tong_Don_Gia = hd.SoLuong * tour.Gia;
+                    db.Entry(hd).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("QLHoaDon");
+                }
+            }
+            return View(hd);
+        }
+        private void setDataDropEditHoaDon()
+        {
+            List<string> listtrangthai = new List<string>();
+            listtrangthai.Add("Hủy");
+            listtrangthai.Add("Xác nhận");
+            listtrangthai.Add("Chờ");
+            SelectList selecttt = new SelectList(listtrangthai);
+            ViewBag.ListTTHoaDon = selecttt;
+            List<Tour> listtour = db.Tours.ToList();
+            SelectList selectlist = new SelectList(listtour, "Tour_Id", "Ten_Tour", "Tour_Id");
+            ViewBag.ListLoaiTourHD = selectlist;
+        }
+        private Tour getTour(int id)
+        {
+            return db.Tours.Find(id);
         }
     }
 }

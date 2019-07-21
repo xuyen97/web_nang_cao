@@ -1,15 +1,21 @@
 ﻿@model QL_Tour_Du_Lich.Models.Tour
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Admin";
     Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
 }
+<style>
+    #tuade{
+        text-align:center;
+    }
+    #thongbao{
+        color:red;
+    }
+</style>
+<h2 id="tuade">Xóa tour</h2>
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
+<h3>Bạn có chắc ?</h3>
 <div>
-    <h4>Tour</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -108,14 +114,14 @@
             @Html.DisplayFor(model => model.Gia)
         </dd>
 
-    </dl>
-
-    @using (Html.BeginForm()) {
+    </dl> 
+    @using (Html.BeginForm("DeleteTour","Admin",FormMethod.Post)) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Xóa" class="btn btn-default" /> |
-            @Html.ActionLink("Trở về", "Index")
+            <h4 id="thongbao" class="col-md-offset-2">@ViewBag.Delete</h4>
+            <input type="submit" value="Xóa" class="btn btn-default; col-md-offset-2"/>
         </div>
     }
+    @Html.ActionLink("Trở về", "QLTour")
 </div>

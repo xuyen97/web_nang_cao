@@ -60,3 +60,4 @@ E:\WebNC\Nhom\project\web_nang_cao\QL_Tour_Du_Lich\QL_Tour_Du_Lich\obj\Debug\QL_
 E:\WebNC\Nhom\project\web_nang_cao\QL_Tour_Du_Lich\QL_Tour_Du_Lich\obj\Debug\QL_Tour_Du_Lich.dll
 E:\WebNC\Nhom\project\web_nang_cao\QL_Tour_Du_Lich\QL_Tour_Du_Lich\obj\Debug\QL_Tour_Du_Lich.pdb
 E:\WebNC\Nhom\project\web_nang_cao\QL_Tour_Du_Lich\QL_Tour_Du_Lich\obj\Debug\QL_Tour_Du_Lich.csprojResolveAssemblyReference.cache
+E:\WebNC\Nhom\project\web_nang_cao\QL_Tour_Du_Lich\QL_Tour_Du_Lich\obj\Debug\QL_Tour_Du_Lich.Migrations.updatecthd.resources

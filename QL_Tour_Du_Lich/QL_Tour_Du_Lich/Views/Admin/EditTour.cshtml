@@ -40,8 +40,6 @@ function fileValidation(){
     }
 }
 </script>
-<h2>EditTour</h2>
-
 @using (Html.BeginForm("EditTour", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
@@ -65,7 +63,7 @@ function fileValidation(){
             <div class="col-md-10">
                 @Html.TextBoxFor(model => model.Hinh_Anh, new { htmlAttributes = new { @class = "form-control" }, @type = "file", onchange = "return fileValidation()" })
                 <br />Ảnh hiện tại<br/>
-                <img id="imagesate" src="~/Hinh/@Html.DisplayFor(model => model.Hinh_Anh)" height="90" width="160"/>
+                <img id="imagesate" src="~/Hinh/@Session["hinhhientai"]" height="90" width="160"/>
                 <br />Ảnh thay đổi<br />
                 <div id="imagePreview"></div>
                 @Html.ValidationMessageFor(model => model.Hinh_Anh, "", new { @class = "text-danger" })
