@@ -75,6 +75,8 @@ namespace QL_Tour_Du_Lich.Controllers
                     Loai_Nguoi_Dung loai = db.Loai_Nguoi_Dungs.Find(tk.Loai_Nguoi_Dung_Id);
                     if (loai.Ten_Loai.Equals("Admin"))
                     {
+                        Session["adminlogin"] = true;
+                        Session["emailadminlogin"] = tk.Email;
                         return RedirectToAction("Index", "Admin");
                     }
                     else

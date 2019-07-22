@@ -21,6 +21,8 @@ namespace QL_Tour_Du_Lich.Controllers
         {
 
             LoadDefaulData();
+            Session["adminlogin"] = false;
+            Session["emailadminlogin"] = "";
             return View(getListTour());
         }
         public ActionResult QueryGia(int id)

@@ -16,5 +16,9 @@ namespace QL_Tour_Du_Lich
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
+        protected void Session_Start()
+        {
+            InitializeData.Initiallize();
+        }
     }
 }

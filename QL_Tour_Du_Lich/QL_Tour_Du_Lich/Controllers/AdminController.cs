@@ -17,10 +17,18 @@ namespace QL_Tour_Du_Lich.Controllers
         
         public ActionResult Index()
         {
+            if((bool)Session["adminlogin"]==false)
+            {
+                return RedirectToAction("DangNhap","TaiKhoan");
+            }
             return View();
         }
         public ActionResult QLTour()
         {
+            if ((bool)Session["adminlogin"] == false)
+            {
+                return RedirectToAction("DangNhap", "TaiKhoan");
+            }
             return View(db.Tours.ToList());
         }
         private void ListLoaiTour()
@@ -39,6 +47,10 @@ namespace QL_Tour_Du_Lich.Controllers
         }
         public ActionResult CreateTour()
         {
+            if ((bool)Session["adminlogin"] == false)
+            {
+                return RedirectToAction("DangNhap", "TaiKhoan");
+            }
             ListLoaiTour();
             ListTrangThai();
             return View();
@@ -48,6 +60,10 @@ namespace QL_Tour_Du_Lich.Controllers
         {
             ListLoaiTour();
             ListTrangThai();
+            if ((bool)Session["adminlogin"] == false)
+            {
+                return RedirectToAction("DangNhap", "TaiKhoan");
+            }
             if (ModelState.IsValid)
             {
                 int sosanh = DateTime.Compare(tour.Thoi_Gian_Di, tour.Thoi_Gian_Ve);
@@ -93,6 +109,10 @@ namespace QL_Tour_Du_Lich.Controllers
         }
         public ActionResult EditTour(int? id)
         {
+            if ((bool)Session["adminlogin"] == false)
+            {
+                return RedirectToAction("DangNhap", "TaiKhoan");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -187,6 +207,10 @@ namespace QL_Tour_Du_Lich.Controllers
         }
         public ActionResult DeleteTour(int? id)
         {
+            if ((bool)Session["adminlogin"] == false)
+            {
+                return RedirectToAction("DangNhap", "TaiKhoan");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -228,6 +252,10 @@ namespace QL_Tour_Du_Lich.Controllers
         }
         public ActionResult EditHoaDon(int? id)
         {
+            if ((bool)Session["adminlogin"] == false)
+            {
+                return RedirectToAction("DangNhap", "TaiKhoan");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
