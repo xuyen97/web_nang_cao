@@ -13,7 +13,6 @@ namespace QL_Tour_Du_Lich
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
         protected void Session_Start()
