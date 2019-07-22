@@ -41,16 +41,16 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             Trong nước
-                            @if ((List<QL_Tour_Du_Lich.Models.Tour>)@Session["DSThanhPhoTrongNuoc"] != null)
+                            @if ((List<string>)@Session["DSThanhPhoTrongNuoc"] != null)
                             {
                                 <span class="caret"></span>
                             }
                         </a>
                         <ul class="dropdown-menu">
-                            @foreach (var x in (List<QL_Tour_Du_Lich.Models.Tour>)@Session["DSThanhPhoTrongNuoc"])
+                            @foreach (var x in (List<string>)@Session["DSThanhPhoTrongNuoc"])
                             {
                                 <li>
-                                    @Html.ActionLink(x.Thanh_Pho, "QueryTrongNuoc", new { tp = x.Thanh_Pho })
+                                    @Html.ActionLink(x, "QueryTrongNuoc", new { tp = x })
                                 </li>
                             }
                         </ul>
@@ -58,16 +58,16 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             Ngoài nước
-                            @if ((List<QL_Tour_Du_Lich.Models.Tour>)@Session["DSThanhPhoNgoaiNuoc"] != null)
+                            @if ((List<string>)@Session["DSThanhPhoNgoaiNuoc"] != null)
                             {
                                 <span class="caret"></span>
                             }
                         </a>
                         <ul class="dropdown-menu">
-                            @foreach (var x in (List<QL_Tour_Du_Lich.Models.Tour>)@Session["DSThanhPhoNgoaiNuoc"])
+                            @foreach (var x in (List<string>)@Session["DSThanhPhoNgoaiNuoc"])
                             {
                                 <li>
-                                    @Html.ActionLink(x.Thanh_Pho, "QueryNgoaiNuoc", new { tp = x.Thanh_Pho })
+                                    @Html.ActionLink(x, "QueryNgoaiNuoc", new { tp = x })
                                 </li>
                             }
                         </ul>

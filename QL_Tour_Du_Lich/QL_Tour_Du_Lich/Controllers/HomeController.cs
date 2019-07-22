@@ -46,21 +46,33 @@ namespace QL_Tour_Du_Lich.Controllers
             List<Tour> list = db.Tours.Where(x => x.So_Luong_Da_Tham_Gia < x.So_Luong_Tham_Gia).ToList();
             return list;
         }
-        private List<Tour> GetListTourTrongNuoc()
+        private List<string> GetListTourTrongNuoc()
         {
             Loai_Tour loai = db.Loai_Tours.Where(x=>x.Ten_Loai_Tour.Equals("Trong nước")).FirstOrDefault();
             
             int loaitourin = loai.Loai_Tour_Id;
             
             List<Tour> listtrongnuoc = db.Tours.Where(x => x.Loai_Tour_Id==loaitourin&&x.So_Luong_Da_Tham_Gia<x.So_Luong_Tham_Gia).ToList();
-            return listtrongnuoc;
+            List<string> listloc = new List<string>();
+            foreach(var x in listtrongnuoc)
+            {
+                listloc.Add(x.Thanh_Pho);
+            }
+            List<string> list = listloc.Distinct().ToList();
+            return list;
         }
-        private List<Tour> GetListTourNgoaiNuoc()
+        private List<string> GetListTourNgoaiNuoc()
         {
             Loai_Tour loai1 = db.Loai_Tours.Where(x => x.Ten_Loai_Tour.Equals("Ngoài nước")).FirstOrDefault();
             int loaitourout = loai1.Loai_Tour_Id;
             List<Tour> listngoainuoc = db.Tours.Where(x => x.Loai_Tour_Id == loaitourout && x.So_Luong_Da_Tham_Gia < x.So_Luong_Tham_Gia).ToList();
-            return listngoainuoc;
+            List<string> listloc = new List<string>();
+            foreach (var x in listngoainuoc)
+            {
+                listloc.Add(x.Thanh_Pho);
+            }
+            List<string> list = listloc.Distinct().ToList();
+            return list;
         }
         private List<Tour> GetListByThanhPho(string thanhpho)
         {

@@ -84,7 +84,7 @@ namespace QL_Tour_Du_Lich.Controllers
                             db.Tours.Add(tour);
                             db.SaveChanges();
                             ViewBag.ThongBao = "Tạo thành công";
-                            return View();
+                            return View(new Tour());
                         }
                         else
                         {
