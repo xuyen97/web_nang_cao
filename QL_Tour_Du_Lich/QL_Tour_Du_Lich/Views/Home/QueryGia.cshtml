@@ -2,7 +2,14 @@
 
 @{
     ViewBag.Title = "Danh sách tour";
-    Layout = "~/Views/Shared/_LayoutPageHome.cshtml";
+    if ((string)Session["Email"] != "")
+    {
+        Layout = "~/Views/Shared/_LayoutPageSuccessLogin.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_LayoutPageHome.cshtml";
+    }
 }
 
 <style>
@@ -25,7 +32,7 @@
             <tr>
                 <td>
                     <h3>
-                        @Html.ActionLink(item.Ten_Tour, "ChiTietTour", new { id = item.Tour_Id })
+                        @Html.ActionLink(item.Ten_Tour, "ChiTietTour","Tour", new { id = item.Tour_Id },null)
                     </h3>
                     <div class="col-md-8">
                         <img src="~/Hinh/@Html.DisplayFor(m => item.Hinh_Anh)" id="hinh_tour" />

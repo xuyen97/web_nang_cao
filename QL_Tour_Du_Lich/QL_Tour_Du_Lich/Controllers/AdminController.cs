@@ -2,9 +2,12 @@
 using QL_Tour_Du_Lich.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -17,7 +20,8 @@ namespace QL_Tour_Du_Lich.Controllers
         
         public ActionResult Index()
         {
-            if((bool)Session["adminlogin"]==false)
+            Session["thongbaoreset"] = "";
+            if ((bool)Session["adminlogin"]==false)
             {
                 return RedirectToAction("DangNhap","TaiKhoan");
             }
@@ -297,10 +301,42 @@ namespace QL_Tour_Du_Lich.Controllers
                     hd.Tong_Don_Gia = hd.SoLuong * tour.Gia;
                     db.Entry(hd).State = EntityState.Modified;
                     db.SaveChanges();
+                    string to = hd.Email.Trim();
+                    Session["thongbao"] = "Kiểm tra email của bạn để xác nhận đơn hàng";
+     
+                    string bodysendmail ="<br/><table class='table'><tr><th>Mã hóa đơn</th><th>Ngày lập</th><th>Đơn giá</th><th>Người lập đơn hàng</th></tr><tr><td>" + hd.Id + "</td><td>" + hd.Ngay_Lap + "</td><td>" + hd.Tong_Don_Gia + "</td><td>" + hd.Ten_Khach_Hang + "</td></tr></table>";
+                    sendMail(to, "Thay đổi đơn hàng từ Easy tour booking", bodysendmail);
                     return RedirectToAction("QLHoaDon");
                 }
             }
             return View(hd);
+        }
+        private void sendMail(string email, string subject, string body)
+        {
+            try
+            {
+                string from = ConfigurationManager.AppSettings["email"];
+                string pass = ConfigurationManager.AppSettings["password"];
+                SmtpClient client = new SmtpClient();
+                client.Port = 587;
+                client.Host = "smtp.gmail.com";
+                client.EnableSsl = true;
+                client.Timeout = 10000;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+                client.Credentials = new System.Net.NetworkCredential(from, pass);
+
+                MailMessage mm = new MailMessage(from, email, subject, body);
+                mm.BodyEncoding = UTF8Encoding.UTF8;
+                mm.IsBodyHtml = true;
+                mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+
+                client.Send(mm);
+            }
+            catch (Exception)
+            {
+                ViewBag.ThongBao = "Không gửi được mail";
+            }
         }
         private void setDataDropEditHoaDon()
         {

@@ -1,7 +1,14 @@
 ﻿
 @{
-    ViewBag.Title = "HomeLogin";
-    Layout = "~/Views/Shared/_LayoutSuccessLogin.cshtml";
+    ViewBag.Title = "Home";
+    if ((string)Session["email"] != "")
+    {
+        Layout = "~/Views/Shared/_LayoutSuccessLogin.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    } 
 }
 <style>
     #tuade{
@@ -13,7 +20,7 @@
 </style>
 <h2 id="tuade">Xác nhận</h2>
 <hr />
-@using (Html.BeginForm("XacNhan", "HomeLogin", FormMethod.Post))
+@using (Html.BeginForm("XacNhan", "Tour", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -32,12 +39,19 @@
             <div class="col-md-offset-2 col-md-10">
                 <h4 id="thongbao">@ViewBag.ThongBao</h4>
                 <h4 id="thongbao">@Session["thongbao"]</h4>
-                <input type="submit" value="Xác nhận" class="btn btn-default" />
+                <input type="submit" value="@Session["ValueButton"]" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 <div>
-    @Html.ActionLink("Trở về", "Index")
+    @if ((string)Session["email"] != "")
+    {
+        @Html.ActionLink("Trở về", "Index", "HomeLogin",null,null)
+    }
+    else
+    {
+        @Html.ActionLink("Trở về", "Index", "Home",null,null)
+    } 
 </div>
 

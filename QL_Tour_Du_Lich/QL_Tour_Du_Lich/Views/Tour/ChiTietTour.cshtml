@@ -2,7 +2,15 @@
 
 @{
     ViewBag.Title = "Chi tiết tour";
-    Layout = "~/Views/Shared/_LayoutPageNguoiDung.cshtml";
+    
+    if((string)Session["email"]!="")
+    {
+        Layout = "~/Views/Shared/_LayoutPageSuccessLoginNguoiDung.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_LayoutPageNguoiDung.cshtml";
+    }
 }
 <style>
     #hinh_tour {
@@ -57,8 +65,8 @@
         </div><br />
         <div class="chucnang">
             <h4>
-                @Html.ActionLink("Đặt tour", "DatTour", new { id=Model.Tour_Id})|
-                @Html.ActionLink("Trở Về", "Index")
+                @Html.ActionLink("Đặt tour", "DatTour","Tour",new { id=Model.Tour_Id},null)|
+                @Html.ActionLink("Trở Về", "Index", "Home", null, null)
             </h4> 
         </div>
     </div> 

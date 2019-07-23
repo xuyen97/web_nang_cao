@@ -153,8 +153,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\HomeLoginController.cs" />
     <Compile Include="Controllers\TaiKhoanController.cs" />
+    <Compile Include="Controllers\TourController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -229,24 +229,17 @@
     <Content Include="Views\Shared\_LayoutPageAdmin.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\QLTour.cshtml" />
-    <Content Include="Views\Home\ChiTietTour.cshtml" />
+    <Content Include="Views\Tour\ChiTietTour.cshtml" />
     <Content Include="Views\Admin\CreateTour.cshtml" />
     <Content Include="Views\Admin\EditTour.cshtml" />
-    <Content Include="Views\Home\DatTour.cshtml" />
+    <Content Include="Views\Tour\DatTour.cshtml" />
     <Content Include="Views\Shared\_LayoutPageNguoiDung.cshtml" />
     <Content Include="Views\Home\QueryGia.cshtml" />
     <Content Include="Views\Home\QueryNgoaiNuoc.cshtml" />
     <Content Include="Views\Home\QueryTrongNuoc.cshtml" />
     <Content Include="Views\Shared\_LayoutPageSuccessLogin.cshtml" />
     <Content Include="Views\Shared\_LayoutPageSuccessLoginNguoiDung.cshtml" />
-    <Content Include="Views\HomeLogin\ChiTietTour.cshtml" />
-    <Content Include="Views\HomeLogin\DatTour.cshtml" />
-    <Content Include="Views\HomeLogin\Index.cshtml" />
-    <Content Include="Views\HomeLogin\QueryGia.cshtml" />
-    <Content Include="Views\HomeLogin\QueryNgoaiNuoc.cshtml" />
-    <Content Include="Views\HomeLogin\QueryTrongNuoc.cshtml" />
-    <Content Include="Views\Home\XacNhan.cshtml" />
-    <Content Include="Views\HomeLogin\XacNhan.cshtml" />
+    <Content Include="Views\Tour\XacNhan.cshtml" />
     <Content Include="Views\Shared\_LayoutSuccessLogin.cshtml" />
     <Content Include="Views\Admin\DeleteTour.cshtml" />
     <Content Include="Views\Admin\QLHoaDon.cshtml" />

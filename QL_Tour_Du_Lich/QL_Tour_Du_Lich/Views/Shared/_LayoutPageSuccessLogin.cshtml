@@ -31,7 +31,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("ETB", "Index", "HomeLogin", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("ETB", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -50,7 +50,7 @@
                             @foreach (var x in (List<string>)@Session["DSThanhPhoTrongNuoc"])
                             {
                                 <li>
-                                    @Html.ActionLink(x, "QueryTrongNuoc", new { tp = x })
+                                    @Html.ActionLink(x, "QueryTrongNuoc","Home", new { tp = x },null)
                                 </li>
                             }
                         </ul>
@@ -67,12 +67,12 @@
                             @foreach (var x in (List<string>)@Session["DSThanhPhoNgoaiNuoc"])
                             {
                                 <li>
-                                    @Html.ActionLink(x, "QueryNgoaiNuoc", new { tp = x })
+                                    @Html.ActionLink(x, "QueryNgoaiNuoc","Home", new { tp = x },null)
                                 </li>
                             }
                         </ul>
                     </li>
-                    <li><a href="/Home/Index"><span class="glyphicon glyphicon-log-out"></span> @Session["Email"]</a></li>
+                    <li><a href="/TaiKhoan/DangXuat"><span class="glyphicon glyphicon-log-out"></span> @Session["Email"]</a></li>
                 </ul>
             </div>
         </div>

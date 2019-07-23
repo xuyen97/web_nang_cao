@@ -2,7 +2,14 @@
 
 @{
     ViewBag.Title = "Đặt tour";
-    Layout = "~/Views/Shared/_LayoutPageNguoiDung.cshtml";
+    if ((string)Session["email"] != "")
+    {
+        Layout = "~/Views/Shared/_LayoutPageSuccessLoginNguoiDung.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_LayoutPageNguoiDung.cshtml";
+    }
 }
 <style>
     #hinh_tour {
@@ -65,7 +72,7 @@
 </div>
 <div class="row">
     <hr/>
-    @using (Html.BeginForm("DatTour", "Home"))
+    @using (Html.BeginForm("DatTour", "Tour"))
     {
         @Html.AntiForgeryToken()
         <div class="form-horizontal">
@@ -81,7 +88,14 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @if ((string)Session["Email"] != "")
+                    {
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control",@Value= (string)Session["Email"] } })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    }
                     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                 </div>
             </div>

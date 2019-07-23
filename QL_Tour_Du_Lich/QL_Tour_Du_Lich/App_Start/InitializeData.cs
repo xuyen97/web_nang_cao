@@ -11,6 +11,7 @@ namespace QL_Tour_Du_Lich.App_Start
         {
             HttpContext.Current.Session["adminlogin"] = false;
             HttpContext.Current.Session["emailadminlogin"] = "";
+            HttpContext.Current.Session["email"] = "";
         }
     }
 }
